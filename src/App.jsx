@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import { AuthProvider } from './contexts/AuthContext'
 import { SubscriptionProvider } from './contexts/SubscriptionContext'
 import Header from './components/Header'
@@ -42,6 +43,29 @@ function App() {
             } />
           </Routes>
         </div>
+        <Toaster
+          position="top-right"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: 'hsl(220, 20%, 12%)',
+              color: 'hsl(0, 0%, 95%)',
+              border: '1px solid hsl(220, 20%, 18%)',
+            },
+            success: {
+              iconTheme: {
+                primary: 'hsl(210, 90%, 50%)',
+                secondary: 'hsl(220, 20%, 12%)',
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: 'hsl(0, 70%, 50%)',
+                secondary: 'hsl(220, 20%, 12%)',
+              },
+            },
+          }}
+        />
       </SubscriptionProvider>
     </AuthProvider>
   )

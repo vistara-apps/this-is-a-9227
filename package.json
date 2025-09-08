@@ -13,7 +13,13 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.1",
     "lucide-react": "^0.263.1",
-    "clsx": "^2.0.0"
+    "clsx": "^2.0.0",
+    "@supabase/supabase-js": "^2.38.0",
+    "@stripe/stripe-js": "^2.1.0",
+    "openai": "^4.20.0",
+    "react-hook-form": "^7.47.0",
+    "react-hot-toast": "^2.4.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
