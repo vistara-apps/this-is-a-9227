@@ -50,9 +50,9 @@ jobs:
       run: |
         echo "⚠️ Vercel deployment skipped - VERCEL_TOKEN secret not configured"
         echo "To enable Vercel deployment, add the following secrets to your repository:"
-        echo "- VERCEL_TOKEN"
-        echo "- VERCEL_ORG_ID" 
-        echo "- VERCEL_PROJECT_ID"
+        echo "- VERCEL_TOKEN: Your Vercel API token"
+        echo "- VERCEL_ORG_ID: Your Vercel organization ID"
+        echo "- VERCEL_PROJECT_ID: Your Vercel project ID"
         
     - name: Comment PR with deployment URL
       if: github.event_name == 'pull_request' && secrets.VERCEL_TOKEN != ''
@@ -76,7 +76,7 @@ jobs:
             });
           }
           
-    - name: Comment PR without deployment
+    - name: Comment PR about skipped deployment
       if: github.event_name == 'pull_request' && secrets.VERCEL_TOKEN == ''
       uses: actions/github-script@v7
       with:
@@ -86,10 +86,10 @@ jobs:
             owner: context.repo.owner,
             repo: context.repo.repo,
             body: `✅ **Build Successful!**
-            \n\n📦 The application built successfully but Vercel deployment is not configured.
-            \n\n🔧 To enable automatic deployments, configure the following repository secrets:
-            \n- \`VERCEL_TOKEN\`
-            \n- \`VERCEL_ORG_ID\`
-            \n- \`VERCEL_PROJECT_ID\`
-            \n\nYou can also deploy manually by running \`npm run build\` and uploading the \`dist\` folder to any static hosting service.`
+            \n\n⚠️ **Vercel deployment skipped** - No deployment secrets configured
+            \n\nTo enable automatic Vercel deployments, add these secrets to your repository:
+            \n- \`VERCEL_TOKEN\`: Your Vercel API token
+            \n- \`VERCEL_ORG_ID\`: Your Vercel organization ID  
+            \n- \`VERCEL_PROJECT_ID\`: Your Vercel project ID
+            \n\nYou can deploy manually by running \`npm run build\` and uploading the \`dist\` folder to any static hosting service.`
           });
