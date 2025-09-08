@@ -6,7 +6,15 @@ if (!stripePublishableKey) {
   throw new Error('Missing Stripe publishable key')
 }
 
-export const stripe = await loadStripe(stripePublishableKey)
+// Lazy load Stripe to avoid top-level await
+let stripePromise = null
+
+export const getStripe = () => {
+  if (!stripePromise) {
+    stripePromise = loadStripe(stripePublishableKey)
+  }
+  return stripePromise
+}
 
 // Subscription tier configurations matching the PRD
 export const subscriptionTiers = {
@@ -77,6 +85,7 @@ export const createCheckoutSession = async (priceId, userId) => {
     }
 
     // Redirect to Stripe Checkout
+    const stripe = await getStripe()
     const result = await stripe.redirectToCheckout({
       sessionId: session.id,
     })
